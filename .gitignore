@@ -1,0 +1,9 @@
+/node_modules/
+/.next/
+/out/
+/.sites-runtime/
+/artifacts/
+*.tsbuildinfo
+next-env.d.ts
+.env*
+!.env.example
