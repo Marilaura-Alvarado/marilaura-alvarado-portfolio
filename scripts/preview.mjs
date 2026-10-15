@@ -8,7 +8,8 @@ const mime = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".
 http.createServer((req, res) => {
   try {
     let file = path.resolve(root, `.${decodeURIComponent(new URL(req.url, "http://localhost").pathname)}`);
-    if (!file.startsWith(root)) { res.writeHead(403).end(); return; }
+    const relative = path.relative(root, file);
+    if (relative.startsWith("..") || path.isAbsolute(relative)) { res.writeHead(403).end(); return; }
     if (statSync(file).isDirectory()) file = path.join(file, "index.html");
     const stat = statSync(file);
     const type = mime[path.extname(file)] || "application/octet-stream";
