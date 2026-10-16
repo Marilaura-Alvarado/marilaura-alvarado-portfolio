@@ -40,7 +40,29 @@ Contact uses email, telephone, and LinkedIn links. The email link opens the visi
 
 All three reference videos are stored locally. The hero and footer use the same orange-and-black video; feature panels use their specified purple and blue videos. A localized footer pause/resume control stops all videos and the marquee. Static gradients remain if video playback fails or reduced motion is requested. Change VIDEO_SOURCES in site-config.ts to replace videos. No third-party frontend services or animation libraries are required. FadeInUp uses IntersectionObserver, a 40px upward reveal, and a 1000ms CSS transition. The marquee repeats five experience wordmarks four times and translates by exactly one group over 30 seconds.
 
-## Build and preview
+## GitHub Pages
+
+Public site: https://marilaura-alvarado.github.io/marilaura-alvarado-portfolio/
+
+The workflow `.github/workflows/nextjs.yml` builds and deploys pushes to `main`. In repository **Settings → Pages**, keep **Source: GitHub Actions**. No custom domain or repository secrets are needed.
+
+```sh
+npm ci
+npm run build:pages
+```
+
+The Pages build derives the repository subpath and public URL from GITHUB_REPOSITORY, with this repository as the local default. NEXT_PUBLIC_BASE_PATH and NEXT_PUBLIC_SITE_URL may override those values. The regular `npm run build` still builds for the private Sites URL at the domain root.
+
+To preview a Pages build locally in PowerShell:
+
+```powershell
+$env:NEXT_PUBLIC_BASE_PATH = "/marilaura-alvarado-portfolio"
+npm run preview
+```
+
+Open http://127.0.0.1:3001/marilaura-alvarado-portfolio/ . Clear that environment variable before previewing a root build.
+
+## Standard build and preview
 
 ```sh
 npm run typecheck

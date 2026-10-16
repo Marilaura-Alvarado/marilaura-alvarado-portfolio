@@ -1,4 +1,4 @@
-export const SITE_URL = "https://marilaura-alvarado-navarro.clevereagle513.chatgpt.site";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://marilaura-alvarado-navarro.clevereagle513.chatgpt.site";
 export const EMAIL = "Marilaura2001@gmail.com";
 export const PHONE = "+50686477992";
 export const LINKEDIN = "https://www.linkedin.com/in/marilaura-alvarado";
