@@ -9,5 +9,9 @@ export const assetPath = (path: string) => `${process.env.NEXT_PUBLIC_BASE_PATH 
 // Add supplied photos here. Paths are relative to public/, never remote placeholders.
 export const photos: { src: string; alt: string; position?: string }[] = [];
 
-// The reference video is optional. An empty URL uses the static gradient fallback.
-export const AMBIENT_VIDEO = "/assets/ambient-gradient.mp4";
+// Locally served videos from the supplied Plety reference.
+export const VIDEO_SOURCES = {
+  hero: "/assets/hero-plety.mp4",
+  delivery: "/assets/ambient-gradient.mp4",
+  analytics: "/assets/analytics-plety.mp4",
+};

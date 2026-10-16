@@ -1,6 +1,6 @@
 # Marilaura Alvarado Navarro — professional portfolio
 
-A separate portfolio based on the structure of Artem's WEB-CV, with a new visual direction from the supplied reference: a near-black background, locally served ambient gradient video, purple-indigo accents, glass surfaces, and a centered editorial hero. The original WEB-CV is preserved.
+A separate portfolio based on Artem's WEB-CV content structure and the supplied Plety design reference: pure black, white primary buttons, an unblurred full-screen video hero, a masked infinite logo marquee, alternating video-backed feature panels, a five-question transparent accordion, and a video footer with four link columns. The original WEB-CV is preserved.
 
 Built with Next.js 16.4.1, React 19, TypeScript, and Tailwind CSS 4. No animation libraries. Content comes from the supplied CV; project results are contextualized as reported collaboration outcomes. English, Spanish, and Russian cover the entire page. Language choice is remembered independently of Artem's site.
 
@@ -30,14 +30,15 @@ The first image fills the portrait area, additional photos appear in the gallery
 ## Content and contacts
 
 - `lib/content.ts`: all EN / ES / RU copy, five roles, education, certificates, project results.
-- `lib/site-config.ts`: verified CV contact links, images, asset base path, optional ambient video path.
+- `lib/design-copy.ts`: localized copy for the Plety composition and its five FAQs.
+- `lib/site-config.ts`: verified CV contact links, images, asset base path, three local reference video paths.
 - `public/assets/Marilaura_Alvarado_Navarro_CV.pdf`: unchanged original CV.
 - `components/portfolio.tsx`: sections, navigation, language selection, gallery, direct contact links, copy-email button.
-- `app/globals.css`: semantic oklch color tokens and responsive styling.
+- `app/globals.css`: reference styling, responsive rules, marquee, scroll reveals, FAQ transitions.
 
 Contact uses email, telephone, and LinkedIn links. The email link opens the visitor's email application. There is no server mail form or simulated delivery confirmation.
 
-The reference video is stored locally. A localized pause/resume control lets visitors stop the motion. A static gradient remains visible if video playback fails or reduced motion is requested. To replace the video, update AMBIENT_VIDEO in site-config.ts; an empty string disables it. No third-party frontend services are required for the page.
+All three reference videos are stored locally. The hero and footer use the same orange-and-black video; feature panels use their specified purple and blue videos. A localized footer pause/resume control stops all videos and the marquee. Static gradients remain if video playback fails or reduced motion is requested. Change VIDEO_SOURCES in site-config.ts to replace videos. No third-party frontend services or animation libraries are required. FadeInUp uses IntersectionObserver, a 40px upward reveal, and a 1000ms CSS transition. The marquee repeats five experience wordmarks four times and translates by exactly one group over 30 seconds.
 
 ## Build and preview
 
@@ -49,4 +50,4 @@ npm run preview
 
 The production static export is `out/`. The preview serves it on http://127.0.0.1:3001. Deploy that directory to a static host. Set NEXT_PUBLIC_BASE_PATH before building when hosting under a repository subpath. The tracked `.openai/hosting.json` belongs to this separate private Site; do not replace it with the original portfolio's identity.
 
-Original inspiration: supplied Scalable design prompt. Its example sales metrics and SaaS marketing copy were replaced by the supplied professional facts. CV hyperlinks supply the LinkedIn, portfolio, and GASIGHT prototype targets. Company names indicate work experience and industry collaboration, rather than endorsements.
+Design reference: the supplied Plety prompt. The personal profile, photo reservations, career history, and education supplement its main composition. Its fictional product copy and links are replaced by professional facts and verified CV hyperlinks. Interface panels are illustrations; company names indicate work experience and industry collaboration, rather than endorsements.
