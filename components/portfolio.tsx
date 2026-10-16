@@ -4,10 +4,14 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowDownToLine, ArrowUpRight, AudioLines, Check, ChevronDown, ChevronLeft, ChevronRight, CircleCheck, Copy, FileText, Layers3, Menu, Pause, Play, Plus, ScanLine, Sparkles, X } from "lucide-react";
 import { content, type Language } from "@/lib/content";
 import { designCopy } from "@/lib/design-copy";
-import { assetPath, EMAIL, LINKEDIN, PHONE, PORTFOLIO, PROTOTYPE, photos, VIDEO_SOURCES as videoSources } from "@/lib/site-config";
+import { assetPath, EMAIL, GITHUB, LINKEDIN, PHONE, PORTFOLIO, PROTOTYPE, photos, VIDEO_SOURCES as videoSources } from "@/lib/site-config";
 
 const locales: Language[] = ["en", "es", "ru"];
 const navigation = ["about", "features", "faq", "contact"];
+
+function SocialLinks() {
+  return <div className="nav-social-links"><a href={LINKEDIN} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M5.3 7.4a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM3.7 9h3.2v12H3.7V9Zm5.6 0h3.1v1.7h.1A3.5 3.5 0 0 1 15.7 9c3.4 0 4 2.2 4 5.1V21h-3.2v-6.1c0-1.5 0-3.3-2-3.3s-2.3 1.5-2.3 3.2V21H9.3V9Z"/></svg></a><a href={GITHUB} target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub · Marilaura-Alvarado"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 .8a11.2 11.2 0 0 0-3.5 21.8c.6.1.8-.2.8-.5v-2.1c-3.2.7-3.8-1.4-3.8-1.4-.5-1.3-1.3-1.6-1.3-1.6-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.6 0-1.2.4-2.2 1.2-3-.1-.3-.5-1.5.1-3 0 0 1-.3 3.1 1.1a10.7 10.7 0 0 1 5.6 0C17.3 4.9 18.3 5.2 18.3 5.2c.6 1.5.2 2.7.1 3 .8.8 1.2 1.8 1.2 3 0 4.3-2.7 5.3-5.3 5.6.4.4.8 1.1.8 2.2v3.1c0 .3.2.6.8.5A11.2 11.2 0 0 0 12 .8Z"/></svg></a></div>;
+}
 
 function Logo({ small = false, onNavigate }: { small?: boolean; onNavigate?: () => void }) {
   return <a className={`brand ${small ? "brand-small" : ""}`} href="#about" aria-label="Marilaura Alvarado Navarro" onClick={onNavigate}><svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="m18 3 13 7.5v15L18 33 5 25.5v-15L18 3Z" stroke="currentColor" strokeWidth="1.5"/><path d="m5 10.5 13 7.7 13-7.7M18 18.2V33M11.5 6.7l13 7.6v7.5L18 25.6l-6.5-3.8v-7.5L24.5 6.7" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/></svg><span>Marilaura<span className="brand-last"> Alvarado</span></span></a>;
@@ -108,7 +112,7 @@ export function Portfolio() {
   return <div className={`portfolio-page bg-black text-white ${paused ? "motion-paused" : ""}`}>
     <a href="#main" className="skip-link">{t.ui.skip}</a>
     <header className={`site-nav fixed inset-x-0 top-0 z-50 ${scrolled || menuOpen ? "is-scrolled" : ""}`}>
-      <div className="nav-inner mx-auto max-w-7xl px-6"><Logo onNavigate={() => setMenuOpen(false)}/><nav className="desktop-nav" aria-label={t.ui.menuOpen}>{navigation.map((id, index) => <a key={id} href={`#${id}`}>{d.nav[index]}</a>)}</nav><div className="nav-actions"><div className="language-switch" role="group" aria-label={t.ui.languageLabel}>{locales.map(locale => <button key={locale} lang={locale} aria-pressed={lang === locale} disabled={!ready} onClick={() => setLang(locale)}>{locale.toUpperCase()}</button>)}</div><a className="nav-cta rounded-full border border-white/5 bg-[#1F1F22] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#2A2A2D]" href="#contact">{d.primary}</a><button ref={menuButton} className="menu-toggle" aria-label={menuOpen ? t.ui.menuClose : t.ui.menuOpen} aria-expanded={menuOpen} aria-controls="mobile-menu" onClick={() => setMenuOpen(old => !old)}>{menuOpen ? <X size={23}/> : <Menu size={23}/>}</button></div></div>
+      <div className="nav-inner mx-auto max-w-7xl px-6"><Logo onNavigate={() => setMenuOpen(false)}/><nav className="desktop-nav" aria-label={t.ui.menuOpen}>{navigation.map((id, index) => <a key={id} href={`#${id}`}>{d.nav[index]}</a>)}</nav><div className="nav-actions"><div className="language-switch" role="group" aria-label={t.ui.languageLabel}>{locales.map(locale => <button key={locale} lang={locale} aria-pressed={lang === locale} disabled={!ready} onClick={() => setLang(locale)}>{locale.toUpperCase()}</button>)}</div><SocialLinks/><a className="nav-cta rounded-full border border-white/5 bg-[#1F1F22] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#2A2A2D]" href="#contact">{d.primary}</a><button ref={menuButton} className="menu-toggle" aria-label={menuOpen ? t.ui.menuClose : t.ui.menuOpen} aria-expanded={menuOpen} aria-controls="mobile-menu" onClick={() => setMenuOpen(old => !old)}>{menuOpen ? <X size={23}/> : <Menu size={23}/>}</button></div></div>
       <nav id="mobile-menu" className={`mobile-menu ${menuOpen ? "is-open" : ""}`} aria-hidden={!menuOpen} inert={!menuOpen} aria-label={t.ui.menuOpen}><div>{navigation.map((id, index) => <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>{d.nav[index]}<ArrowUpRight size={16}/></a>)}</div></nav>
     </header>
 
@@ -148,4 +152,5 @@ export function Portfolio() {
     </footer>
   </div>;
 }
+
 
