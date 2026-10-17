@@ -7,8 +7,10 @@ export const PROTOTYPE = "https://gasight.figma.site/";
 export const PORTFOLIO = "https://drive.google.com/file/d/17E_AWSXgqLyLGFMfspNO3XDIP1cMaAAe/view?pli=1";
 export const assetPath = (path: string) => `${process.env.NEXT_PUBLIC_BASE_PATH || ""}${path}`;
 
-// Add supplied photos here. Paths are relative to public/, never remote placeholders.
-export const photos: { src: string; alt: string; position?: string }[] = [];
+export const portrait = {
+  src: "/assets/photos/marilaura-portrait.png",
+  alt: "Marilaura Alvarado Navarro",
+};
 
 // Locally served videos from the supplied Plety reference.
 export const VIDEO_SOURCES = {

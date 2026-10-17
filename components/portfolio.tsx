@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowDownToLine, ArrowUpRight, AudioLines, Check, ChevronDown, ChevronLeft, ChevronRight, CircleCheck, Copy, FileText, Layers3, Menu, Pause, Play, Plus, ScanLine, Sparkles, X } from "lucide-react";
+import { ArrowDownToLine, ArrowUpRight, AudioLines, Check, ChevronDown, CircleCheck, Copy, FileText, Layers3, Menu, Pause, Play, Plus, Sparkles, X } from "lucide-react";
 import { content, type Language } from "@/lib/content";
 import { designCopy } from "@/lib/design-copy";
-import { assetPath, EMAIL, GITHUB, LINKEDIN, PHONE, PORTFOLIO, PROTOTYPE, photos, VIDEO_SOURCES as videoSources } from "@/lib/site-config";
+import { assetPath, EMAIL, GITHUB, LINKEDIN, PHONE, PORTFOLIO, PROTOTYPE, portrait, VIDEO_SOURCES as videoSources } from "@/lib/site-config";
 
 const locales: Language[] = ["en", "es", "ru"];
 const navigation = ["about", "features", "faq", "contact"];
@@ -46,16 +46,8 @@ function BrandSymbol({ index }: { index: number }) {
   return <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">{index === 0 ? <><path d="m4 23 8-15 5 9 4-9 7 15M8 23h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></> : index === 1 ? <><path d="M8 26V13h6v13m4 0V7h6v19M5 26h22" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/><path d="M20 3c4 4-3 5 0 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></> : index === 2 ? <><rect x="5" y="5" width="22" height="22" rx="6" stroke="currentColor" strokeWidth="2"/><path d="m11 21 10-10M11 11h10v10" stroke="currentColor" strokeWidth="2"/></> : index === 3 ? <><path d="M5 7h22v5H19v15h-6V12H5V7Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/></> : <><path d="M4 25h24M7 25V13m6 12V13m6 12V13m6 12V13M4 10l12-6 12 6H4Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/></>}</svg>;
 }
 
-function PhotoGallery({ lang }: { lang: Language }) {
-  const t = content[lang];
-  const [selected, setSelected] = useState(0);
-  const [failed, setFailed] = useState<string[]>([]);
-  const available = photos.filter(photo => !failed.includes(photo.src));
-  const current = available[selected % Math.max(available.length, 1)];
-  return <div className="photo-gallery">
-    <div className="photo-main">{current ? <img src={assetPath(current.src)} alt={current.alt} style={{ objectPosition: current.position || "center" }} loading="lazy" onError={() => setFailed(old => [...old, current.src])}/> : <div className="photo-reservation" role="img" aria-label={t.ui.portraitLabel}><ScanLine size={22}/><span className="photo-monogram">MA</span><span>{t.ui.portraitNote}</span></div>}{available.length > 1 && <div className="photo-controls"><button aria-label={lang === "ru" ? "Предыдущее фото" : lang === "es" ? "Foto anterior" : "Previous photo"} onClick={() => setSelected(old => (old - 1 + available.length) % available.length)}><ChevronLeft size={16}/></button><button aria-label={lang === "ru" ? "Следующее фото" : lang === "es" ? "Siguiente foto" : "Next photo"} onClick={() => setSelected(old => (old + 1) % available.length)}><ChevronRight size={16}/></button></div>}</div>
-    <div className="photo-thumbnails" aria-label={t.ui.galleryLabel}>{[1, 2, 3].map(index => { const photo = available[index]; return photo ? <button className="photo-thumb" key={photo.src} onClick={() => setSelected(index)} aria-label={photo.alt} aria-pressed={selected === index}><img src={assetPath(photo.src)} alt={photo.alt} loading="lazy" onError={() => setFailed(old => [...old, photo.src])}/></button> : <div className="photo-thumb photo-thumb-empty" key={index}><ScanLine size={13}/><span>{t.ui.galleryNote}</span></div>; })}</div>
-  </div>;
+function ProfilePortrait() {
+  return <div className="profile-portrait"><img src={assetPath(portrait.src)} alt={portrait.alt} width={1254} height={1254} loading="lazy" decoding="async"/></div>;
 }
 
 function FAQ({ lang }: { lang: Language }) {
@@ -135,7 +127,7 @@ export function Portfolio() {
         </div>
       </section>
 
-      <section id="profile" className="profile-section mx-auto max-w-7xl px-6 py-24"><FadeInUp className="profile-grid"><PhotoGallery lang={lang}/><div className="profile-copy"><p className="section-label">{d.profileLabel}</p><h2 className="text-4xl font-semibold tracking-tight md:text-5xl">Marilaura Alvarado Navarro<span className="profile-period">.</span></h2><p className="mt-6 text-base leading-7 text-gray-400">{t.section.aboutBody}</p><div className="profile-languages">{t.languages.map(language => <span key={language.name}>{language.name}<small>{language.level}</small></span>)}</div><a className="button button-dark mt-8" href={assetPath("/assets/Marilaura_Alvarado_Navarro_CV.pdf")} download>{t.ui.downloadCv}<ArrowDownToLine size={16}/></a></div></FadeInUp></section>
+      <section id="profile" className="profile-section mx-auto max-w-7xl px-6 py-24"><FadeInUp className="profile-grid"><ProfilePortrait/><div className="profile-copy"><p className="section-label">{d.profileLabel}</p><h2 className="text-4xl font-semibold tracking-tight md:text-5xl">Marilaura Alvarado Navarro<span className="profile-period">.</span></h2><p className="mt-6 text-base leading-7 text-gray-400">{t.section.aboutBody}</p><div className="profile-languages">{t.languages.map(language => <span key={language.name}>{language.name}<small>{language.level}</small></span>)}</div><a className="button button-dark mt-8" href={assetPath("/assets/Marilaura_Alvarado_Navarro_CV.pdf")} download>{t.ui.downloadCv}<ArrowDownToLine size={16}/></a></div></FadeInUp></section>
 
       <section id="experience" className="resume-section mx-auto max-w-7xl px-6 py-24"><FadeInUp><div className="resume-heading"><h2 className="text-4xl font-semibold tracking-tight md:text-5xl">{d.experienceTitle}</h2><p>{t.section.experienceIntro}</p></div><div className="experience-list">{t.jobs.map(job => <details className="experience-item" key={job.company}><summary><span><strong>{job.company}</strong><small>{job.role}</small></span><span className="experience-date">{job.period}</span><ChevronDown size={17}/></summary><div className="experience-detail"><p className="job-type">{job.type}</p><p>{job.summary}</p><ul>{job.bullets.map(bullet => <li key={bullet}>{bullet}</li>)}</ul></div></details>)}</div></FadeInUp>
         <FadeInUp className="education-grid" delay={100}><div id="education"><h3 className="text-2xl font-semibold tracking-tight">{d.educationTitle}</h3>{t.education.map(degree => <article className="degree" key={degree.degree}><span>{degree.period}</span><h4>{degree.degree}</h4><p>{degree.school}</p></article>)}</div><div className="certifications"><h3 className="text-2xl font-semibold tracking-tight">{t.certificatesLabel}</h3><ul>{t.certificates.map(item => <li key={item.name}><span>{item.name}</span><time>{item.year}</time></li>)}</ul></div></FadeInUp>

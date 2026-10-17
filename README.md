@@ -13,19 +13,18 @@ npm run dev
 
 Open http://127.0.0.1:3001. This workspace initially reuses the original project's installed dependencies through a local node_modules junction. A fresh checkout can install independently with npm install. Webpack is selected explicitly to support the shared dependency directory.
 
-## Add photographs
+## Portrait
 
-1. Put supplied images in `public/assets/photos/` (prefer optimized WebP or JPEG).
-2. Add entries to the `photos` array in `lib/site-config.ts`:
+The profile displays the supplied photograph from `public/assets/photos/marilaura-portrait.png` in a responsive square frame. To replace it, update the `portrait` entry in `lib/site-config.ts`:
 
 ```ts
-export const photos = [
-  { src: "/assets/photos/portrait.webp", alt: "Marilaura Alvarado Navarro", position: "center 35%" },
-  { src: "/assets/photos/photo-02.webp", alt: "Describe the supplied photograph" },
-];
+export const portrait = {
+  src: "/assets/photos/marilaura-portrait.png",
+  alt: "Marilaura Alvarado Navarro",
+};
 ```
 
-The first image fills the portrait area, additional photos appear in the gallery strip, and previous/next controls appear when multiple images are available. Until then, the page shows a designed MA monogram and localized photo reservations. Invalid images fall back to the same treatment.
+The profile uses one image without thumbnails or carousel controls.
 
 ## Content and contacts
 
@@ -33,7 +32,7 @@ The first image fills the portrait area, additional photos appear in the gallery
 - `lib/design-copy.ts`: localized copy for the Plety composition and its five FAQs.
 - `lib/site-config.ts`: verified CV contact links, images, asset base path, three local reference video paths.
 - `public/assets/Marilaura_Alvarado_Navarro_CV.pdf`: unchanged original CV.
-- `components/portfolio.tsx`: sections, navigation, language selection, gallery, direct contact links, copy-email button.
+- `components/portfolio.tsx`: sections, navigation, language selection, portrait, direct contact links, copy-email button.
 - `app/globals.css`: reference styling, responsive rules, marquee, scroll reveals, FAQ transitions.
 
 Contact uses email, telephone, and LinkedIn links. The email link opens the visitor's email application. There is no server mail form or simulated delivery confirmation.
